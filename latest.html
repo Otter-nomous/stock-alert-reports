@@ -6,16 +6,31 @@
   <style>
     details > summary::-webkit-details-marker { display:none }
     details > summary { list-style:none }
-    details[open] > summary { border-bottom:1px solid #e5e5e7 }
-    /* Mobile: stack expanded detail columns vertically */
+    @keyframes audioBar { 0%,100% { height:3px } 50% { height:22px } }
+    .ab { width:3px;background:rgba(255,255,255,0.55);border-radius:2px;
+           animation:audioBar 0.9s ease-in-out infinite;min-height:3px }
+    #play-btn:hover { transform:scale(1.08) }
     @media only screen and (max-width: 480px) {
-      .detail-col { width:100% !important; display:block !important;
-                     padding-right:0 !important; margin-bottom:10px }
+      .detail-col { width:100% !important;display:block !important;
+                     padding-right:0 !important;margin-bottom:10px }
       .header-pad  { padding:20px 16px 18px !important }
       .body-pad    { padding:16px 12px !important }
       .etf-price   { display:none }
     }
   </style>
+  <script>
+    function toggleAudio() {
+      var a = document.getElementById('mkt-audio');
+      var btn = document.getElementById('play-btn');
+      var bars = document.getElementById('audio-bars');
+      if (a.paused) {
+        a.play(); btn.textContent = '⏸'; bars.style.display = 'flex';
+      } else {
+        a.pause(); btn.textContent = '▶'; bars.style.display = 'none';
+      }
+      a.onended = function() { btn.textContent = '▶'; bars.style.display = 'none'; };
+    }
+  </script>
 </head>
 <body style="margin:0;padding:0;background:#f2f2f7">
 
@@ -31,12 +46,13 @@
       <!-- ── HEADER ── -->
       <tr>
         <td class="header-pad"
-            style="background:#1d1d1f;padding:30px 28px 26px">
+            style="background:#1d1d1f;padding:24px 28px 28px;text-align:center">
           <div style="font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:10px;font-weight:600;
                       letter-spacing:0.10em;text-transform:uppercase;
-                      color:#6e6e73;margin-bottom:12px">Pre-Close&ensp;·&ensp;March 20, 2026</div>
+                      color:#6e6e73;margin-bottom:4px">Pre-Market&ensp;·&ensp;March 21, 2026</div>
           
-          <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse:collapse;width:100%;margin-top:14px"><tr><td style="vertical-align:bottom"><details style="margin-top:4px"><summary style="list-style:none;-webkit-appearance:none;cursor:pointer;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:0.04em;display:inline-flex;align-items:center;gap:6px;padding:4px 0;user-select:none">Market Analysis <span style="font-size:10px">▾</span></summary><div style="margin-top:12px;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,0.06)"><p style="margin:0 0 12px;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#d1d1d6;line-height:1.7">Major indices closed sharply lower, with SPY down 1.70%, QQQ off 1.85%, and leveraged tech plays like TQQQ and SOXL cratering 5.71% and 6.76% respectively. The day's catalyst was Super Micro Computer's (SMCI) devastating 33.3% collapse following co-founder indictment for smuggling $2.5B in restricted AI servers to China—triggering contagion across semiconductors (WDC -7.5%, STX -5.4%, INTC -5.0%) and raising broader export control concerns. Utilities suffered simultaneous pressure from Middle East geopolitical tensions: VST dropped 12.8% despite recent upgrades, CEG fell 10.9% on its $5B natural gas sale requirement, and NRG declined 9.7%. A secondary layer of weakness hit energy (MOS -10.0% on BofA downgrade), data centers (IRM -5.1% profit-taking), and discretionary industrials (FIX -6.1%).</p><p style="margin:0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#d1d1d6;line-height:1.7"><span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#6e6e73;display:block;margin-bottom:4px">Recommendation</span>Avoid tech hardware and semiconductor exposure until export control policies clarify—SMCI's indictment signals regulatory risk that will persist. Utilities like VST and CEG are oversold on profit-taking and geopolitical noise; selective entry on weakness in nuclear/AI power plays remains justified for long-term accounts. Healthcare (INSM) and select data center names (IRM) are showing technical weakness but fundamentals haven't shifted; hold positions and wait for stabilization before adding.</p></div></details></td><td style="vertical-align:bottom;text-align:right;white-space:nowrap;padding-left:12px"><button onclick="(function(b){var a=document.getElementById('mkt-audio');if(a.paused){a.play();b.textContent='⏸ Pause'}else{a.pause();b.textContent='▶ Listen'}}(this))" style="background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#f5f5f7;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;cursor:pointer">▶ Listen</button><audio id="mkt-audio" src="https://stock-reports.otternomous.com/2026-03-20-23.mp3?v=202603202359" preload="none"></audio></td></tr></table>
+          
+          <div style="text-align:left"><details style="margin-top:16px"><summary style="list-style:none;-webkit-appearance:none;cursor:pointer;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:600;color:#6e6e73;letter-spacing:0.05em;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;padding:4px 0;user-select:none">Market Analysis <span style="font-size:10px">▾</span></summary><div style="margin-top:14px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.07)"><p style="margin:0 0 14px;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#d1d1d6;line-height:1.75">Markets are opening lower across the board, with the Nasdaq leading declines (QQQ -1.85%, TQQQ -5.71%) as Super Micro Computer's (SMCI) 33.3% collapse—triggered by co-founder indictment for smuggling $2.5 billion in restricted Nvidia servers to China—creates a contagion effect across semiconductors and storage (WDC -7.5%, STX -5.4%, SNDK -8.1%). Utilities are getting hammered independently (VST -12.8%, CEG -10.9%, NRG -9.7%) amid Middle East tensions and geopolitical inflation concerns, while BofA's Mosaic downgrade (MOS -10.0%) reflects margin pressures in fertilizers. Pockets of strength remain—Insmed's Brensocatib approval is being ignored amid valuation concerns—but the day is defined by sector rotation away from overheated names and supply-chain risk reassessment.</p><p style="margin:0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#d1d1d6;line-height:1.75"><span style="display:block;font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#6e6e73;margin-bottom:5px">Recommendation</span>Avoid tech and semiconductor names today; the SMCI export-control scandal has created genuine uncertainty about supply-chain compliance across the AI hardware ecosystem that will take days to price in. Energy and utilities look oversold on geopolitical fears rather than fundamentals—consider nibbling on high-quality names like NRG and CEG on dips if you have conviction on long-term demand. Hold cash or rotate into defensive sectors until the SMCI fallout stabilizes and Middle East risk premium clarifies.</p></div></details></div>
         </td>
       </tr>
 
@@ -206,7 +222,9 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Supermicro's co-founder was indicted for conspiring to smuggle $2.5 billion in restricted Nvidia AI servers to China, triggering the stock collapse.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic"># SMCI Stock Drop Explanation
+
+Co-founder Yih-Shyan "Wally" Lia was indicted for conspiring to smuggle $2.5 billion in restricted Nvidia AI servers to China, violating export controls.</p>
           </div>
         </details>
       </td>
@@ -283,7 +301,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">VST dropped 12.8% despite recent investment-grade upgrades and bullish analyst ratings, likely due to profit-taking after strong nuclear/AI power demand rally.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Market likely repricing VST higher after recent investment-grade upgrades and bullish analyst coverage, causing profit-taking from recent gains.</p>
           </div>
         </details>
       </td>
@@ -360,7 +378,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">CEG fell 10.9% amid broader market decline and investor concern over its $5 billion natural gas asset sale requirement.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">CEG fell 10.9% due to the broader market decline and its $5 billion divestiture of natural gas assets to focus on low-carbon power generation.</p>
           </div>
         </details>
       </td>
@@ -437,7 +455,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Bank of America downgraded Mosaic to Neutral, citing margin pressures in the phosphate fertilizer market, overshadowing geopolitical supply benefits.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Bank of America downgraded Mosaic to Neutral, citing margin pressures in the phosphate fertilizer market, outweighing geopolitical supply benefits.</p>
           </div>
         </details>
       </td>
@@ -514,7 +532,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">The 9.7% decline likely reflects broader market risk-off sentiment from Middle East tensions and elevated oil prices, compounded by NRG's recent sector underperformance.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Middle East tensions and elevated oil prices are creating broader market headwinds pressuring energy stocks like NRG alongside moderating upward momentum.</p>
           </div>
         </details>
       </td>
@@ -591,7 +609,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Sandisk declined 8.1% today following profit-taking after a 25% weekly surge, amid concerns about valuation sustainability in the memory sector.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">SanDisk is pulling back after a 25% weekly surge and 1,200% yearly gain, likely taking profits amid valuation concerns in the memory sector.</p>
           </div>
         </details>
       </td>
@@ -668,7 +686,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">WDC fell alongside semiconductor peers after Super Micro Computer's AI chip smuggling charges raised broader export control concerns affecting the sector.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Super Micro Computer's AI chip smuggling charges spooked semiconductor/storage investors, causing broad sector selloff including WDC.</p>
           </div>
         </details>
       </td>
@@ -745,7 +763,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Ciena fell 7.0% likely due to broader semiconductor sector weakness, as the Dow declined Friday with tech stocks like Nvidia and Super Micro selling off significantly.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Ciena fell 7% amid broader market selloff in tech stocks, despite positive quantum security initiatives and service provider revenue growth.</p>
           </div>
         </details>
       </td>
@@ -822,7 +840,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Middle East geopolitical tensions sparked inflation and recession concerns, causing broad market selloff affecting Corning alongside other stocks.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Middle East geopolitical tensions sparked inflation and recession concerns, causing broad market selloff that hit Corning alongside other cyclical stocks.</p>
           </div>
         </details>
       </td>
@@ -899,7 +917,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">FIX declined 6.1% amid broader market selloff driven by Middle East geopolitical tensions raising inflation and recession concerns.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">FIX declined 6.1% likely due to broader market selloff driven by Middle East geopolitical tensions raising inflation and recession concerns, offsetting strong company fundamentals.</p>
           </div>
         </details>
       </td>
@@ -976,7 +994,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Artisan Small Cap Fund's sale of Insmed citing valuation concerns likely triggered the 5.6% decline despite positive Brensocatib approval and BofA price target raise.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Artisan Small Cap Fund sold its Insmed position due to valuation concerns, outweighing positive Brensocatib approval news and analyst price target increases.</p>
           </div>
         </details>
       </td>
@@ -1053,7 +1071,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Super Micro Computer executive charged with smuggling AI chips to China triggered sector-wide selloff, pulling Seagate stock down 5.4%.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Super Micro Computer's AI chip smuggling charges likely triggered sector-wide semiconductor selloff, dragging Seagate stock down despite broader storage demand strength.</p>
           </div>
         </details>
       </td>
@@ -1130,7 +1148,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Iron Mountain declined 5.1% likely due to profit-taking after a 29.3% three-month rally, despite ongoing data center expansion and analyst optimism.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Iron Mountain declined 5.1% likely due to profit-taking after a 29% three-month rally, despite strong data center growth prospects.</p>
           </div>
         </details>
       </td>
@@ -1207,7 +1225,7 @@
               </tr>
             </table>
 
-            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Intel likely fell 5% as investors rotated into competing AI growth stocks like Nvidia, viewing Intel as disadvantaged in the AI chip market race.</p>
+            <p style="margin:10px 0 0;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;color:#3a3a3c;line-height:1.55;font-style:italic">Intel fell 5% as investors rotated toward AI growth stocks and Magnificent Seven companies, which are now trading at discounted valuations.</p>
           </div>
         </details>
       </td>
@@ -1221,7 +1239,7 @@
       <tr>
         <td style="background:#f5f5f7;padding:14px 24px;
                    border-top:1px solid #e5e5e7">
-          <a href="https://stock-reports.otternomous.com/2026-03-20-23.html" style="display:inline-block;background:#1d1d1f;color:#f5f5f7;font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:13px;font-weight:600;padding:8px 20px;border-radius:20px;text-decoration:none;margin-bottom:12px">View Full Interactive Report →</a><br>
+          
           <span style="font-family:-apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;font-size:11px;color:#aeaeb2">
             Daily Market Brief &nbsp;·&nbsp; data via yfinance
             &nbsp;·&nbsp; AI analysis via Claude
